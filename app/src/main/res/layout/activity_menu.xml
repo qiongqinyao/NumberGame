@@ -16,12 +16,13 @@
         android:layout_height="90dp"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
-        android:src="@drawable/btn_play1"
+        android:src="@drawable/btnplay_selector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="170dp"
         />
+
     <!--播放音乐按钮 -->
     <ImageButton
         android:id="@+id/menu_music"

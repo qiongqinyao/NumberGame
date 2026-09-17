@@ -6,4 +6,12 @@
     </style>
 
     <style name="Theme.NumberGame" parent="Base.Theme.NumberGame" />
+
+    <style name="roundButton">
+        <!-- rounded 平滑圆角 -->
+        <item name="cornerFamily">rounded</item>
+        <!-- cornerSize="50%"：圆角半径50%, 正方形就变成正圆形 -->
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

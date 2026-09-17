@@ -1,5 +1,6 @@
 package com.example.numbergame
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,16 @@ class MenuActivity : AppCompatActivity() {
                 btnMusic.setImageResource(R.drawable.btn_music1)
                 isPlayMusic = true
             }
+        }
+
+        val btnAbout: ImageButton = findViewById(R.id.menu_about)
+        btnAbout.setOnClickListener{
+            startActivity(Intent(this, AboutActivity::class.java))
+        }
+
+        val btnStart: ImageButton = findViewById(R.id.menu_start)
+        btnStart.setOnClickListener {
+            startActivity(Intent(this, SelectActivity::class.java))
         }
     }
 }
