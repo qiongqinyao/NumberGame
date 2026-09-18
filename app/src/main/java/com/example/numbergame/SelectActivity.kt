@@ -11,8 +11,6 @@ import com.google.android.material.button.MaterialButton
 
 class SelectActivity : AppCompatActivity() {
 
-    private var isPlayMusic = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,16 +22,10 @@ class SelectActivity : AppCompatActivity() {
         }
 
         val btnMusic: ImageButton = findViewById(R.id.select_music)
-
+        updateMusicButton(btnMusic)
         btnMusic.setOnClickListener {
-            if(isPlayMusic){
-                btnMusic.setImageResource(R.drawable.btn_music2)
-                isPlayMusic = false
-            }
-            else{
-                btnMusic.setImageResource(R.drawable.btn_music1)
-                isPlayMusic = true
-            }
+            MusicManager.toggle()
+            updateMusicButton(btnMusic)
         }
 
         findViewById<ImageButton>(R.id.Number0).setOnClickListener {goPlay(0)}
@@ -54,4 +46,27 @@ class SelectActivity : AppCompatActivity() {
         intent.putExtra("SELECT_NUMBER",i)
         startActivity(intent)
     }
+
+    override fun onStart() {
+        super.onStart()
+        MusicManager.onActivityStart()
+        val btnMusic: ImageButton = findViewById(R.id.select_music)
+        updateMusicButton(btnMusic)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        MusicManager.onActivityStop()
+    }
+
+
+    private fun updateMusicButton(btn: ImageButton) {
+        if (MusicManager.isPlaying) {
+            btn.setImageResource(R.drawable.btn_music1)
+        }
+        else {
+            btn.setImageResource(R.drawable.btn_music2)
+        }
+    }
+
 }

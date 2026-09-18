@@ -22,7 +22,6 @@ class PlayActivity : AppCompatActivity() {
         R.drawable.anim_on5, R.drawable.anim_on6, R.drawable.anim_on7, R.drawable.anim_on8, R.drawable.anim_on9
     )
 
-    private var isPlayMusic = true
     private val handler = Handler()
     private lateinit var frames : AnimationDrawable
     private var frameIndex = 0
@@ -44,19 +43,6 @@ class PlayActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_play)
 
-        val btnMusic: ImageButton = findViewById(R.id.play_music)
-        btnMusic.setOnClickListener {
-            if(isPlayMusic){
-                btnMusic.setImageResource(R.drawable.btn_music2)
-                isPlayMusic = false
-            }
-            else{
-                btnMusic.setImageResource(R.drawable.btn_music1)
-                isPlayMusic = true
-            }
-        }
-
-
 
         val selectNumber = intent.getIntExtra("SELECT_NUMBER",-1)
 
@@ -72,21 +58,54 @@ class PlayActivity : AppCompatActivity() {
         frames = resources.getDrawable(animResArray[selectNumber],theme) as AnimationDrawable
         frameIndex = 0
 
+        val btnMusic: ImageButton = findViewById(R.id.play_music)
+        updateMusicButton(btnMusic)
+        btnMusic.setOnClickListener {
+            MusicManager.toggle()
+            updateMusicButton(btnMusic)
+        }
+
+
         val Reback = findViewById<com.google.android.material.button.MaterialButton>(R.id.playReback)
         Reback.setOnClickListener {
             finish()
         }
     }
 
+
+
     override fun onStart() {
         super.onStart()
-        frameIndex = 0                       // 重新开始
+        // 音乐计数+1
+        MusicManager.onActivityStart()
+        // 同步按钮状态
+        val btnMusic: ImageButton = findViewById(R.id.play_music)
+        updateMusicButton(btnMusic)
+
+        // 动画重新开始
+        frameIndex = 0
         handler.post(nextFrame)
     }
 
+    override fun onStop() {
+        super.onStop()
+        // 音乐计数-1
+        MusicManager.onActivityStop()
+        // 停止动画
+        handler.removeCallbacks(nextFrame)
+    }
 
-    override fun onPause() {
-        super.onPause()
-        handler.removeCallbacks (nextFrame )
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(nextFrame)
+    }
+
+    private fun updateMusicButton(btn: ImageButton) {
+        if (MusicManager.isPlaying) {
+            btn.setImageResource(R.drawable.btn_music1)
+        }
+        else {
+            btn.setImageResource(R.drawable.btn_music2)
+        }
     }
 }
