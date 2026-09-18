@@ -85,8 +85,8 @@ class PlayActivity : AppCompatActivity() {
     }
 
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         handler.removeCallbacks (nextFrame )
     }
 }

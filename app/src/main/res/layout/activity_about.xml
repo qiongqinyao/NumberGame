@@ -22,7 +22,7 @@
         android:id = "@+id/aboutText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="这是一个教你写数字的游戏哦( ⁰▿⁰)!\n\n\n努力去写对每一个数字吧！骚年( •̀ᴗ•́ )و"
+        android:text="这是一个教你写数字的游戏哦( ⁰▿⁰)!\n\n\n努力去写对每一个数字吧！骚年( •̀ᴗ•́ )و\n\n开发者：鱼仔"
         android:textColor="#ff8d04"
         android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"

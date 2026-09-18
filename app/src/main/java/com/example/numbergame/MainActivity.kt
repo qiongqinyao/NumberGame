@@ -39,9 +39,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-        // 销毁页面
         }
 
     override fun onStart() {
